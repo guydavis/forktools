@@ -1,11 +1,5 @@
 #! /usr/bin/env bash
 
-echo "Installing forktools main branch..."
-
-echo "Updating ( git fetch --all, git reset --hard origin/main ) to most current version of forktools main branch..."
-git fetch --all
-git reset --hard origin/main
-
 # Test for curl installation
 CURLFOUND=$( type -P curl )
 if [[ $CURLFOUND != '' ]]; then

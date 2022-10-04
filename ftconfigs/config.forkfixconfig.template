@@ -4,9 +4,9 @@
 #   set only the values you want to override there.  This file will still be read for all other values that aren't overridden by such entries.  
 
 SETLOGLEVEL='INFO'            # Default chia value: 'WARNING'. Strongly recommend setting to 'INFO' for all forks. Some forktools will not work well without this.
-SETMAXLOGROTATION='99'        # Default chia value: 7. The number of logs to retain. I strongly recommend setting to 99 or even higher, to preserve full history.
-SETPLOTLOADFREQUENCY='18000'  # Default chia value: 120 seconds (2 minutes). Recommend 1800 (30 minutes) if still plotting, 18000 (5 hours) if done plotting.
-SETFNTARGETPEERCOUNT='80'     # Default chia value: 80. I don't have a recommendation for this one, but some people like to adjust it, so here's the option.
+SETMAXLOGROTATION='7'         # Default chia value: 7. The number of logs to retain. I strongly recommend setting to 99 or even higher, to preserve full history.
+SETPLOTLOADFREQUENCY='1800'   # Default chia value: 120 seconds (2 minutes). Recommend 1800 (30 minutes) if still plotting, 18000 (5 hours) if done plotting.
+SETFNTARGETPEERCOUNT='20'     # Default chia value: 80. Lowered to save memory, as has no real effect on farming.
 SETFNRESERVEDCORES='0'        # Default chia value: 0. Default means unlimited core usage by this blockchain, which consumes a lot of memory. To save memory when running many blockchain fullnodes on the same machine, set reserved_cores to one less than your host machine's cores (including hyperthreading) which forces the blockchain to launch many fewer "full_node_worker" processes.
 SETBATCHSIZE='1500'           # Default chia value: Initially 30, now 300. I don't have problems loading all my plots in one batch.  If you do, please report it.
 SETBATCHSLEEP='1'             # Default chia value: Initially 10, now 1. 

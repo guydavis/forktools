@@ -81,7 +81,7 @@ while read line; do
   if [[ $SETFNRESERVEDCORES != '' && $SECTION == *full_node:* && $WORKLINE == *reserved_cores:* ]];
   then
      OLDRSVCORES=$(sed 's/reserved_cores: //' <<< "$WORKLINE" | awk '{$1=$1};1')
-     NEWRSVCORES=$(sed "s/$OLDRSVCORES/$SETFNRERSERVEDCORES/" <<< "$WORKLINE")$PRESERVECOMMENT
+     NEWRSVCORES=$(sed "s/$OLDRSVCORES/$SETFNRESERVEDCORES/" <<< "$WORKLINE")$PRESERVECOMMENT
      OLDRSVCORES=$line
      RESERVEDCORESLINENO=$LINENUMBER
      continue     
@@ -192,7 +192,7 @@ if [[ $SETFNTARGETPEERCOUNT != '' && $OLDTGTPEERS != $NEWTGTPEERS ]]; then
   echo "  New Target Peer Count: " $NEWTGTPEERS
   ANYCHANGES='Yes'
 fi
-if [[ $SETFNRESERVEDCORESCOUNT != '' && $OLDRSVCORES != $NEWRSVCORES ]]; then  
+if [[ $SETFNRESERVEDCORES != '' && $OLDRSVCORES != $NEWRSVCORES ]]; then  
   echo "  Old Reserved Cores: " $OLDRSVCORES
   echo "  New Reserved Cores: " $NEWRSVCORES
   ANYCHANGES='Yes'
@@ -351,7 +351,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
       echo "Setting target peer count..."
       sed -i.bak "${TARGETPEERLINENO}s/$OLDTGTPEERS/$NEWTGTPEERS/" $CURRENTCONFIG
    fi
-   if [[ $SETFNRESERVEDCORESCOUNT != '' && $OLDRSVCORES != $NEWRSVCORES ]]; then  
+   if [[ $SETFNRESERVEDCORES != '' && $OLDRSVCORES != $NEWRSVCORES ]]; then  
       echo "Setting reserved cores..."
       sed -i.bak "${RESERVEDCORESLINENO}s/$OLDRSVCORES/$NEWRSVCORES/" $CURRENTCONFIG
    fi

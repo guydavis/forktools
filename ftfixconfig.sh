@@ -78,6 +78,14 @@ while read line; do
      TARGETPEERLINENO=$LINENUMBER
      continue     
   fi
+  if [[ $SETFNRESERVEDCORES != '' && $SECTION == *full_node:* && $WORKLINE == *reserved_cores:* ]];
+  then
+     OLDRSVCORES=$(sed 's/reserved_cores: //' <<< "$WORKLINE" | awk '{$1=$1};1')
+     NEWRSVCORES=$(sed "s/$OLDRSVCORES/$SETFNRESERVEDCORES/" <<< "$WORKLINE")$PRESERVECOMMENT
+     OLDRSVCORES=$line
+     RESERVEDCORESLINENO=$LINENUMBER
+     continue     
+  fi
   if [[ $SETFARMERPEER != '' && $SECTION == *harvester:* && $WORKLINE == *host:* ]];
   then
      OLDFARMPEER=$(grep "host: " <<< "$WORKLINE" | sed 's/host: //' | sed 's/"//g' | sed 's/'\''//g' | awk '{$1=$1};1')
@@ -182,6 +190,11 @@ fi
 if [[ $SETFNTARGETPEERCOUNT != '' && $OLDTGTPEERS != $NEWTGTPEERS ]]; then  
   echo "  Old Target Peer Count: " $OLDTGTPEERS
   echo "  New Target Peer Count: " $NEWTGTPEERS
+  ANYCHANGES='Yes'
+fi
+if [[ $SETFNRESERVEDCORES != '' && $OLDRSVCORES != $NEWRSVCORES ]]; then  
+  echo "  Old Reserved Cores: " $OLDRSVCORES
+  echo "  New Reserved Cores: " $NEWRSVCORES
   ANYCHANGES='Yes'
 fi
 if [[ $SETFARMERPEER != '' && $OLDFARMPEER != $NEWFARMPEER ]]; then  
@@ -337,6 +350,10 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
    if [[ $SETFNTARGETPEERCOUNT != '' && $OLDTGTPEERS != $NEWTGTPEERS ]]; then  
       echo "Setting target peer count..."
       sed -i.bak "${TARGETPEERLINENO}s/$OLDTGTPEERS/$NEWTGTPEERS/" $CURRENTCONFIG
+   fi
+   if [[ $SETFNRESERVEDCORES != '' && $OLDRSVCORES != $NEWRSVCORES ]]; then  
+      echo "Setting reserved cores..."
+      sed -i.bak "${RESERVEDCORESLINENO}s/$OLDRSVCORES/$NEWRSVCORES/" $CURRENTCONFIG
    fi
    if [[ $SETFARMERPEER != '' && $OLDFARMPEER != $NEWFARMPEER ]]; then
       echo "Setting farmer peer in harvester section..."

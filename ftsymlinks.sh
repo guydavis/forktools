@@ -58,6 +58,13 @@ if [[ ( -d "$FORKTOOLSHIDDENDIRS/.chiarose" ) && ( ! -d "$FORKTOOLSHIDDENDIRS/.r
   ln -sv $FORKTOOLSHIDDENDIRS/.chiarose $FORKTOOLSHIDDENDIRS/.rose
 fi
 
+# Symlink creation for mainnet folder
+if [[ ( -d "$FORKTOOLSHIDDENDIRS/.chinilla/vanillanet" ) && ( ! -d "$FORKTOOLSHIDDENDIRS/.chinilla/mainnet" ) ]]; then
+  printf 'Created symlink: '
+  ln -sv $FORKTOOLSHIDDENDIRS/.chinilla/vanillanet $FORKTOOLSHIDDENDIRS/.chinilla/mainnet
+fi
+
+
 
 # Symlink creation for code directories
 if [[ ( -d "$FORKTOOLSBLOCKCHAINDIRS/silicoin-blockchain/chia" ) && ( ! -d "$FORKTOOLSBLOCKCHAINDIRS/silicoin-blockchain/sit" ) ]]; then
@@ -84,6 +91,19 @@ if [[ ( -d "$FORKTOOLSBLOCKCHAINDIRS/flora-blockchain/chia" ) && ( ! -d "$FORKTO
   printf 'Created symlink: '
   ln -sv $FORKTOOLSBLOCKCHAINDIRS/flora-blockchain/chia $FORKTOOLSBLOCKCHAINDIRS/flora-blockchain/flora
 fi
+if [[ ( -d "$FORKTOOLSBLOCKCHAINDIRS/bpx-blockchain/chia" ) && ( ! -d "$FORKTOOLSBLOCKCHAINDIRS/bpx-blockchain/bpx" ) ]]; then
+  printf 'Created symlink: '
+  ln -sv $FORKTOOLSBLOCKCHAINDIRS/bpx-blockchain/chia $FORKTOOLSBLOCKCHAINDIRS/bpx-blockchain/bpx
+fi
+if [[ ( -d "$FORKTOOLSBLOCKCHAINDIRS/gold-blockchain/chia" ) && ( ! -d "$FORKTOOLSBLOCKCHAINDIRS/gold-blockchain/gold" ) ]]; then
+  printf 'Created symlink: '
+  ln -sv $FORKTOOLSBLOCKCHAINDIRS/gold-blockchain/chia $FORKTOOLSBLOCKCHAINDIRS/gold-blockchain/gold
+fi
+if [[ ( -d "$FORKTOOLSBLOCKCHAINDIRS/petroleum-blockchain/chia" ) && ( ! -d "$FORKTOOLSBLOCKCHAINDIRS/petroleum-blockchain/petroleum" ) ]]; then
+  printf 'Created symlink: '
+  ln -sv $FORKTOOLSBLOCKCHAINDIRS/petroleum-blockchain/chia $FORKTOOLSBLOCKCHAINDIRS/petroleum-blockchain/petroleum
+fi
+
 
 
 # Symlink creation for executables
@@ -99,4 +119,5 @@ if [[ ( -f "$FORKTOOLSBLOCKCHAINDIRS/fishery-blockchain/venv/bin/chia" ) && ( ! 
   printf 'Created symlink: '
   ln -sv $FORKTOOLSBLOCKCHAINDIRS/fishery-blockchain/venv/bin/chia $FORKTOOLSBLOCKCHAINDIRS/fishery-blockchain/venv/bin/fishery
 fi
+
 
